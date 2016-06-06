@@ -1,0 +1,164 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		48C30CF71937FD01009E4206 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48C30CF21937FD00009E4206 /* NativeProjectLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 48C30CC91937FD00009E4206;
+			remoteInfo = NativeProjectLib;
+		};
+		48C30CF91937FD01009E4206 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48C30CF21937FD00009E4206 /* NativeProjectLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 48C30CD91937FD00009E4206;
+			remoteInfo = NativeProjectLibTests;
+		};
+		48C30D3B19380ECA009E4206 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48C30D3619380EC9009E4206 /* NativeProjectBootstrap.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 48C30D0419380EC9009E4206;
+			remoteInfo = NativeProjectBootstrap;
+		};
+		48C30D3D19380ECA009E4206 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 48C30D3619380EC9009E4206 /* NativeProjectBootstrap.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 48C30D1F19380EC9009E4206;
+			remoteInfo = NativeProjectBootstrapTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		48C30CF21937FD00009E4206 /* NativeProjectLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NativeProjectLib.xcodeproj; path = NativeProjectLib/NativeProjectLib.xcodeproj; sourceTree = "<group>"; };
+		48C30D3619380EC9009E4206 /* NativeProjectBootstrap.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NativeProjectBootstrap.xcodeproj; path = NativeProjectBootstrap/NativeProjectBootstrap.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		48C30CB91937F801009E4206 = {
+			isa = PBXGroup;
+			children = (
+				48C30D3619380EC9009E4206 /* NativeProjectBootstrap.xcodeproj */,
+				48C30CF21937FD00009E4206 /* NativeProjectLib.xcodeproj */,
+			);
+			sourceTree = "<group>";
+		};
+		48C30CF31937FD00009E4206 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				48C30CF81937FD01009E4206 /* libNativeProjectLib.a */,
+				48C30CFA1937FD01009E4206 /* NativeProjectLibTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		48C30D3719380EC9009E4206 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				48C30D3C19380ECA009E4206 /* NativeProjectBootstrap.app */,
+				48C30D3E19380ECA009E4206 /* NativeProjectBootstrapTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		48C30CBA1937F801009E4206 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = 48C30CBD1937F801009E4206 /* Build configuration list for PBXProject "NativeProject" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 48C30CB91937F801009E4206;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 48C30D3719380EC9009E4206 /* Products */;
+					ProjectRef = 48C30D3619380EC9009E4206 /* NativeProjectBootstrap.xcodeproj */;
+				},
+				{
+					ProductGroup = 48C30CF31937FD00009E4206 /* Products */;
+					ProjectRef = 48C30CF21937FD00009E4206 /* NativeProjectLib.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		48C30CF81937FD01009E4206 /* libNativeProjectLib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libNativeProjectLib.a;
+			remoteRef = 48C30CF71937FD01009E4206 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		48C30CFA1937FD01009E4206 /* NativeProjectLibTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NativeProjectLibTests.xctest;
+			remoteRef = 48C30CF91937FD01009E4206 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		48C30D3C19380ECA009E4206 /* NativeProjectBootstrap.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = NativeProjectBootstrap.app;
+			remoteRef = 48C30D3B19380ECA009E4206 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		48C30D3E19380ECA009E4206 /* NativeProjectBootstrapTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = NativeProjectBootstrapTests.xctest;
+			remoteRef = 48C30D3D19380ECA009E4206 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin XCBuildConfiguration section */
+		48C30CBE1937F801009E4206 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		48C30CBF1937F801009E4206 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		48C30CBD1937F801009E4206 /* Build configuration list for PBXProject "NativeProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48C30CBE1937F801009E4206 /* Debug */,
+				48C30CBF1937F801009E4206 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 48C30CBA1937F801009E4206 /* Project object */;
+}

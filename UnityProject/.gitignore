@@ -1,0 +1,14 @@
+/Library/
+/Temp/
+*.csproj
+*.sln
+*.unityproj
+*.userprefs
+*.DotSettings
+*.DS_Store
+obj/
+*.app/
+xcode/
+*.apk
+UnityVS.meta
+UnityVS/
