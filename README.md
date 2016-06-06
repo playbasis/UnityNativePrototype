@@ -1,8 +1,10 @@
 # Overview
 
-This repository demonstrates how to integrate Unity with UIKit and the native Android UI. It consists of three projects:
+This repository is based on [https://github.com/haxpor/UnityNativePrototype](https://github.com/haxpor/UnityNativePrototype) but optimized and pre-configured with proper build setting to work with Playbasis SDK.
 
-* UnityProject (upgraded and tested with version 5.1.3f1)- a sample Unity project that renders some text and a button, and allows switching to the native view
+It demonstrates how to integrate Unity with UIKit and the native Android UI. It consists of three projects:
+
+* UnityProject (upgraded and tested with version **5.3.2f1**)- a sample Unity project that renders some text and a button, and allows switching to the native view
 * NativeProject - an Xcode project that has two subprojects:
    * NativeProjectLib - a static iOS library that provides a sample native UI with a navigation controller and a button to switch back to Unity
    * NativeProjectBootstrap - an iOS app that links against the static library in order to allow iterating on the native UI
@@ -61,7 +63,7 @@ When building from Unity for iOS, after the Xcode project is generated and loade
 
 * Add the storyboard file to the project. You need to copy it from UnityProject's Plugins/iOS folder manually (preferably) to Libraries/Plugins/iOS of Xcode project.
 * Add the -ObjC flag to "Other linker flags" (and also possibly -force_load or -load_all as mentioned above)
-* Change the following lines in `UnityViewControllerBase.h` file from
+* Change the following lines in `UnityViewControllerBaseiOS.h` file from
 
 ```
     // this is helper to add proper rotation handling methods depending on ios version
@@ -143,7 +145,10 @@ To build the entire project out for running on a device:
 6. Once it has finished building, go into that folder and you should see an Xcode project. Load the project.
 7. Add the storyboard file Storyboard.storyboard to the project (it is in xcode/Libraries).
 8. Add the -ObjC flag to "Other linker flags" in Build Settings->Linking.
-9. Run the project.
+9. Set Enable Bitcode to "No" in Build Settings->Build Options.
+10. Set Enable C++ Runtime Types to "Yes" in Build Settings->Apple LLVM 7.1 - Language C++
+11. Add "libstdc++" in Build Phases->Link Binary With Libraries.
+12. Run the project.
 
 ## iOS - Building for simulator
 
