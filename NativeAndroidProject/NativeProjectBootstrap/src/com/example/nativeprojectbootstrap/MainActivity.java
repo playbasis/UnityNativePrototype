@@ -16,7 +16,7 @@ public class MainActivity extends ActionBarActivity {
 
 	public void onBackToUnityClicked(View view)
 	{
-		Log.i("MainActivity", "Returning to Unity..");
+		Log.i("MainActivity", "Returning to Unity (test) ..");
 	}
 
 	@Override

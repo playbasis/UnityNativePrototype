@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.9.7
+Created-By: 1.8.0_92-b14 (Oracle Corporation)
+Class-Path: PlaybasisAndroidWrapper.jar android-support-v4.jar android
+ -support-v7-appcompat.jar conceal_android.jar conceal_so_files.jar gs
+ on-2.3.jar libconceal.jar playbasis.jar
+

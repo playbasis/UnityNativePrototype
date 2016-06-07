@@ -24,7 +24,7 @@ public class CustomNativeActivity extends UnityPlayerNativeActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-;		int id = getResources().getIdentifier("test_view", "layout", getPackageName());
+		int id = getResources().getIdentifier("test_view", "layout", getPackageName());
 		setContentView(id);
 
 		Log.i("UnityPlayerNativeActivity", "onCreate, authenticate app...");
