@@ -21,6 +21,8 @@ public class Button : MonoBehaviour
 		#if UNITY_STANDALONE_OSX
 		PlaybasisWrapper.loadMacOSXLib();
 		#endif
+
+		PlaybasisWrapper.initialize();
 	}
 
 	void Update()
