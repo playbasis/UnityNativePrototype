@@ -82,7 +82,17 @@ typedef enum
     responseType_playersQuizRank,
     responseType_resetPoint,
     responseType_uniqueCode,
-    responseType_ruleDetail
+    responseType_ruleDetail,
+    responseType_storeOrganize,
+    responseType_nodeOrganize,
+    responseType_saleHistory,
+    responseType_saleBoard,
+    responseType_playerRole,
+    responseType_associated,
+    responseType_content,
+    responseType_leaderBoard,
+    responseType_leaderBoardByAction,
+    responseType_playerListFromNode
 }pbResponseType;
 
 ///--------------------------------------
@@ -945,6 +955,7 @@ typedef enum
 @property (strong, nonatomic, readonly) NSString *siteId;
 @property (strong, nonatomic, readonly) NSDate *dateModified;
 @property (strong, nonatomic, readonly) NSString *questId;
+@property (strong, nonatomic, readonly) NSDictionary *num_mission;
 
 +(PBQuest *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1049,7 +1060,7 @@ typedef enum
 @property (strong, nonatomic, readonly) NSString *name;
 @property (strong, nonatomic, readonly) NSString *description_;
 @property (strong, nonatomic, readonly) NSString *perUser;
-@property (strong, nonatomic, readonly) NSString *quantity;
+@property (strong, nonatomic, readonly) NSString *code;
 
 +(PBRuleEventGoodsRewardData *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1065,8 +1076,6 @@ typedef enum
 @property (strong, nonatomic, readonly) NSString *name;
 @property (strong, nonatomic, readonly) NSString *description_;
 @property (strong, nonatomic, readonly) NSString *hint;
-@property (nonatomic, readonly) BOOL claim;
-@property (nonatomic, readonly) BOOL redeem;
 
 +(PBRuleEventBadgeRewardData *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1083,7 +1092,6 @@ typedef enum
 // arbitrary data, it can be anything thus we use id as a data type here
 // certain reward type doesn't have any reward-data, but some has
 @property (strong, nonatomic, readonly) id rewardData;
-@property (nonatomic, readonly) NSNumber* index;
 
 +(PBRuleEvent *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1192,6 +1200,7 @@ typedef enum
 @interface PBRuleDetail_Response : PBBase_Response
 
 @property (strong, nonatomic, readonly) PBRuleRewards_Response *ruleReward;
+@property (strong, nonatomic, readonly) NSMutableDictionary *state;
 
 +(PBRuleDetail_Response *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1913,6 +1922,209 @@ typedef enum
 +(PBResetPoint_Response *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
 @end
+///--------------------------------------
+/// PBOrganize - Parent
+///--------------------------------------
+@interface PBParentOrganize : PBBase_Response
+@property (strong, readonly) NSString *_id;
+@property (strong, readonly) NSString *name;
+
++(PBParentOrganize *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+
+@end
+///--------------------------------------
+/// PBOrganize
+///--------------------------------------
+
+@interface PBStoreOrganize : PBBase_Response
+@property (strong, readonly) NSString *_id;
+@property (strong, readonly) NSString *name;
+@property (strong, readonly) NSString *description;
+@property (nonatomic ,readonly) BOOL status;
+@property (strong, readonly) NSString *slug;
+@property (strong, readonly) NSString *date_added;
+@property (strong, readonly) NSString *date_modified;
+@property (strong, readonly) PBParentOrganize *parent;
+
++(PBStoreOrganize *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+
+@end
+///--------------------------------------
+/// PBOrganize - Response
+///--------------------------------------
+@interface PBStoreOrganize_Response : PBBase_Response
+@property (strong, nonatomic, readonly) NSMutableArray<PBStoreOrganize*> *list;
++(PBStoreOrganize_Response *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+
+@end
+
+///--------------------------------------
+/// PBNodeOrganize
+///--------------------------------------
+@interface PBNodeOrganize: PBBase_Response
+@property (strong, readonly) NSString *_id;
+@property (strong, readonly) NSString *name;
+@property (strong, readonly) NSString *description;
+@property (nonatomic ,readonly) BOOL status;
+@property (strong, readonly) NSString *slug;
+@property (strong, readonly) NSString *date_added;
+@property (strong, readonly) NSString *date_modified;
+@property (strong, readonly) PBParentOrganize *organize;
+@property (strong, readonly) PBParentOrganize *parent;
+
++(PBNodeOrganize *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+@end
+
+///--------------------------------------
+/// PBNodeOrganize - Response
+///--------------------------------------
+@interface PBNodeOrganize_Response : PBBase_Response
+@property (strong, nonatomic, readonly) NSMutableArray<PBNodeOrganize*> *list;
+
++(PBNodeOrganize_Response *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+
+@end
+
+
+///--------------------------------------
+/// Associated - Response
+///--------------------------------------
+@interface PBAssociatedNode_Response : PBBase_Response
+@property (strong, readonly) NSString *node_id;
+@property (strong, readonly) NSString *name;
+
++(PBAssociatedNode_Response *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+@end
+///--------------------------------------
+/// PlayerRole - Parent
+///--------------------------------------
+@interface PBParentRole : PBBase_Response
+@property (strong, readonly) NSString *role;
+@property (strong, readonly) NSString *join_date;
++(PBParentRole *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+@end
+///--------------------------------------
+/// PlayerRole - Response
+///--------------------------------------
+@interface PBPlayerRole_Response : PBBase_Response
+@property (strong, readonly) NSString *organize_type;
+@property (strong, readonly) NSMutableArray<PBParentRole*> *roles;
++(PBPlayerRole_Response *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+@end
+
+///--------------------------------------
+/// SaleHistory
+///--------------------------------------
+@interface PBSaleHistory : PBBase_Response
+@property (strong,readonly) NSString *keys;
+@property (strong,readonly) NSString *year;
+@property (strong,readonly) NSString *month;
+@property (strong,readonly) NSString *amount;
+@property (strong,readonly) NSString *previous_amount;
+@property (strong,readonly) NSString *percent_changed;
++(PBSaleHistory *)parseFromDictionary:(const NSDictionary *)jsonResponse year:(NSString *)year month:(NSString *)month startFromFinalLevel:(BOOL)startFromFinalLevel;
+@end
+
+///--------------------------------------
+/// SaleHistory Response
+///--------------------------------------
+@interface PBSaleHistory_Response : PBBase_Response
+@property (strong, nonatomic, readonly) NSMutableArray<PBSaleHistory*>  *list;
++(PBSaleHistory_Response *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+@end
+
+///--------------------------------------
+/// SaleBoard
+///--------------------------------------
+@interface PBSaleBoard : PBBase_Response
+@property (strong,readonly) NSString *node_id;
+@property (strong,readonly) NSString *name;
+@property (strong,readonly) NSString *amount;
+@property (strong,readonly) NSString *previous_amount;
+@property (strong,readonly) NSString *percent_changed;
++(PBSaleBoard *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+@end
+///--------------------------------------
+/// SaleHistory Board
+///--------------------------------------
+@interface PBSaleBoard_Response : PBBase_Response
+@property (strong, nonatomic, readonly) NSMutableArray *list;
++(PBSaleBoard_Response *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+@end
+///--------------------------------------
+/// LeaderBoard
+///--------------------------------------
+@interface PBLeaderBoard : PBBase_Response
+@property (strong, readonly) NSMutableDictionary *rank;
+
++(PBLeaderBoard *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+@end
+
+///--------------------------------------
+/// LeaderBoard - Response
+///--------------------------------------
+@interface PBLeaderBoard_Response : PBBase_Response
+@property (strong, readonly) NSMutableArray *list;
+
++(PBLeaderBoard_Response *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+@end
+///--------------------------------------
+/// LeaderBoardByAction
+///--------------------------------------
+@interface PBLeaderBoardByAction : PBBase_Response
+/*
+@property (strong, readonly) NSString *name;
+@property (strong, readonly) NSString *amount;
+@property (strong, readonly) NSString *previous_amount;
+@property (strong, readonly) NSString *percent_changed;
+@property (strong, readonly) PBPlayerBasic *player;*/
+@property (strong, readonly) NSMutableDictionary *rank;
+
++(PBLeaderBoardByAction *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+@end
+
+///--------------------------------------
+/// LeaderBoardByAction - Response
+///--------------------------------------
+@interface PBLeaderBoardByAction_Response : PBBase_Response
+@property (strong, readonly) NSMutableArray<PBLeaderBoardByAction*> *list;
+
++(PBLeaderBoardByAction_Response *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+@end
+///--------------------------------------
+/// Content
+///--------------------------------------
+@interface PBContent : PBBase_Response
+@property (strong, readonly) NSString *title;
+@property (strong, readonly) NSString *summary;
+@property (strong, readonly) NSString *detail;
+@property (strong, readonly) NSString *date_start;
+@property (strong, readonly) NSString *date_end;
+@property (strong, readonly) NSString *image;
+@property (strong, readonly) NSString *category;
+
++(PBContent *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+@end
+
+///--------------------------------------
+/// Content - Response
+///--------------------------------------
+@interface PBContent_Response : PBBase_Response
+@property (strong, nonatomic, readonly) NSMutableArray<PBContent*> *list;
+
++(PBContent_Response *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+
+@end
+
+///--------------------------------------
+/// PlayerListFromNode - Response
+///--------------------------------------
+@interface PBPlayerListFromNode_Response : PBBase_Response
+@property (strong, readonly) NSMutableArray *list;
+
++(PBPlayerListFromNode_Response *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+@end
+
 
 ///--------------------------------------
 /// ManualSetResultStatus - Response

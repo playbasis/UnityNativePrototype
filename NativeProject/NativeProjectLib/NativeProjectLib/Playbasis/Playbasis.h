@@ -96,6 +96,26 @@
 +(void)setProtectedResourcesKey:(NSString *)key;
 
 /**
+ Set server url that SDK uses for synchronized api calls.
+ */
++(void)setServerUrl:(NSString*)url;
+
+/**
+ Get server url that SDK uses for synchronized api calls.
+ */
++(NSString*)getServerUrl;
+
+/**
+ Set asynchronized server url that SDK uses for aynchronized api calls.
+ */
++(void)setServerAsyncUrl:(NSString*)url;
+
+/**
+ Get asynchronized server url that SDK uses for aynchronized api calls.
+ */
++(NSString*)getServerAsyncUrl;
+
+/**
  Get the singleton instance of Playbasis.
  */
 +(Playbasis*)sharedPB;
@@ -297,20 +317,20 @@
  Tell Playbasis system that player has logged in.
  It uses delegate callback.
  */
--(PBRequestUnit *)loginPlayer:(NSString *)playerId withDelegate:(id<PBResultStatus_ResponseHandler>)delegate;
--(PBRequestUnit *)loginPlayer:(NSString *)playerId withBlock:(PBResultStatus_ResponseBlock)block;
--(PBRequestUnit *)loginPlayerAsync:(NSString *)playerId withDelegate:(id<PBResultStatus_ResponseHandler>)delegate;
--(PBRequestUnit *)loginPlayerAsync:(NSString *)playerId withBlock:(PBResultStatus_ResponseBlock)block;
--(PBRequestUnit *)loginPlayerAsync_:(NSString *)playerId withBlock:(PBAsyncURLRequestResponseBlock)block;
+-(PBRequestUnit *)loginPlayer:(NSString *)playerId options:(NSMutableDictionary *)options withDelegate:(id<PBResultStatus_ResponseHandler>)delegate;
+-(PBRequestUnit *)loginPlayer:(NSString *)playerId options:(NSMutableDictionary *)options withBlock:(PBResultStatus_ResponseBlock)block;
+-(PBRequestUnit *)loginPlayerAsync:(NSString *)playerId options:(NSMutableDictionary *)options withDelegate:(id<PBResultStatus_ResponseHandler>)delegate;
+-(PBRequestUnit *)loginPlayerAsync:(NSString *)playerId options:(NSMutableDictionary *)options withBlock:(PBResultStatus_ResponseBlock)block;
+-(PBRequestUnit *)loginPlayerAsync_:(NSString *)playerId options:(NSMutableDictionary *)options withBlock:(PBAsyncURLRequestResponseBlock)block;
 
 /**
  Tell Playbasis system that player has logged out.
  */
--(PBRequestUnit *)logoutPlayer:(NSString *)playerId withDelegate:(id<PBResultStatus_ResponseHandler>)delegate;
--(PBRequestUnit *)logoutPlayer:(NSString *)playerId withBlock:(PBResultStatus_ResponseBlock)block;
--(PBRequestUnit *)logoutPlayerAsync:(NSString *)playerId withDelegate:(id<PBResultStatus_ResponseHandler>)delegate;
--(PBRequestUnit *)logoutPlayerAsync:(NSString *)playerId withBlock:(PBResultStatus_ResponseBlock)block;
--(PBRequestUnit *)logoutPlayerAsync_:(NSString *)playerId withBlock:(PBAsyncURLRequestResponseBlock)block;
+-(PBRequestUnit *)logoutPlayer:(NSString *)playerId sessionId:(NSString *)sessionId withDelegate:(id<PBResultStatus_ResponseHandler>)delegate;
+-(PBRequestUnit *)logoutPlayer:(NSString *)playerId sessionId:(NSString *)sessionId withBlock:(PBResultStatus_ResponseBlock)block;
+-(PBRequestUnit *)logoutPlayerAsync:(NSString *)playerId sessionId:(NSString *)sessionId withDelegate:(id<PBResultStatus_ResponseHandler>)delegate;
+-(PBRequestUnit *)logoutPlayerAsync:(NSString *)playerId sessionId:(NSString *)sessionId withBlock:(PBResultStatus_ResponseBlock)block;
+-(PBRequestUnit *)logoutPlayerAsync_:(NSString *)playerId sessionId:(NSString *)sessionId withBlock:(PBAsyncURLRequestResponseBlock)block;
 
 /**
  Returns information about all point-based rewards that a player currently have.
@@ -466,21 +486,23 @@
 /**
  Claim a badge that player has earned.
  */
+/*
 -(PBRequestUnit *)claimBadgeForPlayer:(NSString *)playerId badgeId:(NSString *)badgeId andDelegate:(id<PBResultStatus_ResponseHandler>)delegate;
 -(PBRequestUnit *)claimBadgeForPlayer:(NSString *)playerId badgeId:(NSString *)badgeId andBlock:(PBResultStatus_ResponseBlock)block;
 -(PBRequestUnit *)claimBadgeForPlayerAsync:(NSString *)playerId badgeId:(NSString *)badgeId andDelegate:(id<PBResultStatus_ResponseHandler>)delegate;
 -(PBRequestUnit *)claimBadgeForPlayerAsync:(NSString *)playerId badgeId:(NSString *)badgeId andBlock:(PBResultStatus_ResponseBlock)block;
 -(PBRequestUnit *)claimBadgeForPlayerAsync_:(NSString *)playerId badgeId:(NSString *)badgeId andBlock:(PBAsyncURLRequestResponseBlock)block;
-
+*/
 /**
  Redeem a badge that player has claimed.
  */
+/*
 -(PBRequestUnit *)redeemBadgeForPlayer:(NSString *)playerId badgeId:(NSString *)badgeId andDelegate:(id<PBResultStatus_ResponseHandler>)delegate;
 -(PBRequestUnit *)redeemBadgeForPlayer:(NSString *)playerId badgeId:(NSString *)badgeId andBlock:(PBResultStatus_ResponseBlock)block;
 -(PBRequestUnit *)redeemBadgeForPlayerAsync:(NSString *)playerId badgeId:(NSString *)badgeId andDelegate:(id<PBResultStatus_ResponseHandler>)delegate;
 -(PBRequestUnit *)redeemBadgeForPlayerAsync:(NSString *)playerId badgeId:(NSString *)badgeId andBlock:(PBResultStatus_ResponseBlock)block;
 -(PBRequestUnit *)redeemBadgeForPlayerAsync_:(NSString *)playerId badgeId:(NSString *)badgeId andBlock:(PBAsyncURLRequestResponseBlock)block;
-
+*/
 /**
  Return information about all goods that player has redeemed.
  */
@@ -500,10 +522,10 @@
 /**
  Return list of quest that player has joined.
  */
--(PBRequestUnit *)questListOfPlayer:(NSString *)playerId withDelegate:(id<PBQuestListOfPlayer_ResponseHandler>)delegate;
--(PBRequestUnit *)questListOfPlayer:(NSString *)playerId withBlock:(PBQuestListOfPlayer_ResponseBlock)block;
--(PBRequestUnit *)questListOfPlayerAsync:(NSString *)playerId withDelegate:(id<PBQuestListOfPlayer_ResponseHandler>)delegate;
--(PBRequestUnit *)questListOfPlayerAsync:(NSString *)playerId withBlock:(PBQuestListOfPlayer_ResponseBlock)block;
+-(PBRequestUnit *)questListOfPlayer:(NSString *)playerId filter:(NSString *)filter withDelegate:(id<PBQuestListOfPlayer_ResponseHandler>)delegate;
+-(PBRequestUnit *)questListOfPlayer:(NSString *)playerId filter:(NSString *)filter withBlock:(PBQuestListOfPlayer_ResponseBlock)block;
+-(PBRequestUnit *)questListOfPlayerAsync:(NSString *)playerId filter:(NSString *)filter withDelegate:(id<PBQuestListOfPlayer_ResponseHandler>)delegate;
+-(PBRequestUnit *)questListOfPlayerAsync:(NSString *)playerId filter:(NSString *)filter withBlock:(PBQuestListOfPlayer_ResponseBlock)block;
 
 /**
  Return quest reward history of player.
@@ -586,10 +608,17 @@
 /**
  Return information about all available goods on the current site.
  */
+/*
 -(PBRequestUnit *)goodsListWithDelegate:(id<PBGoodsListInfo_ResponseHandler>)delegate;
 -(PBRequestUnit *)goodsListWithBlock:(PBGoodsListInfo_ResponseBlock)block;
 -(PBRequestUnit *)goodsListAsyncWithDelegate:(id<PBGoodsListInfo_ResponseHandler>)delegate;
--(PBRequestUnit *)goodsListAsyncWithBlock:(PBGoodsListInfo_ResponseBlock)block;
+-(PBRequestUnit *)goodsListAsyncWithBlock:(PBGoodsListInfo_ResponseBlock)block;*/
+
+-(PBRequestUnit *)goodsList:(NSString *)playerId tags:(NSString *)tags withDelegate:(id<PBGoodsListInfo_ResponseHandler>)delegate;
+-(PBRequestUnit *)goodsList:(NSString *)playerId tags:(NSString *)tags withBlock:(PBGoodsListInfo_ResponseBlock)block;
+-(PBRequestUnit *)goodsListAsync:(NSString *)playerId tags:(NSString *)tags withDelegate:(id<PBGoodsListInfo_ResponseHandler>)delegate;
+-(PBRequestUnit *)goodsListAsync:(NSString *)playerId tags:(NSString *)tags withBlock:(PBGoodsListInfo_ResponseBlock)block;
+
 
 /**
  Find number of available goods given group.
@@ -630,10 +659,10 @@
 /**
  + Return information about engine rule.
  + */
--(PBRequestUnit *)ruleDetailForPlayer:(NSString *)ruleId withDelegate:(id<PBRuleDetail_ResponseHandler>)delegate;
--(PBRequestUnit *)ruleDetailForPlayer:(NSString *)ruleId withBlock:(PBRuleDetail_ResponseBlock)block;
--(PBRequestUnit *)ruleDetailForPlayerAsync:(NSString *)ruleId withDelegate:(id<PBRuleDetail_ResponseHandler>)delegate;
--(PBRequestUnit *)ruleDetailForPlayerAsync:(NSString *)ruleId withBlock:(PBRuleDetail_ResponseBlock)block;
+-(PBRequestUnit *)ruleDetailForPlayer:(NSString *)playeId ruleId:(NSString *)ruleId withDelegate:(id<PBRuleDetail_ResponseHandler>)delegate;
+-(PBRequestUnit *)ruleDetailForPlayer:(NSString *)playeId ruleId:(NSString *)ruleId withBlock:(PBRuleDetail_ResponseBlock)block;
+-(PBRequestUnit *)ruleDetailForPlayerAsync:(NSString *)playeId ruleId:(NSString *)ruleId withDelegate:(id<PBRuleDetail_ResponseHandler>)delegate;
+-(PBRequestUnit *)ruleDetailForPlayerAsync:(NSString *)playeId ruleId:(NSString *)ruleId withBlock:(PBRuleDetail_ResponseBlock)block;
 
   
 /**
@@ -822,10 +851,10 @@
  Return a list of active quizzes.
  With optional parameter 'playerId'.
  */
--(PBRequestUnit *)quizListOfPlayer:(NSString *)playerId withDelegate:(id<PBActiveQuizList_ResponseHandler>)delegate;
--(PBRequestUnit *)quizListOfPlayer:(NSString *)playerId withBlock:(PBActiveQuizList_ResponseBlock)block;
--(PBRequestUnit *)quizListOfPlayerAsync:(NSString *)playerId withDelegate:(id<PBActiveQuizList_ResponseHandler>)delegate;
--(PBRequestUnit *)quizListOfPlayerAsync:(NSString *)playerId withBlock:(PBActiveQuizList_ResponseBlock)block;
+-(PBRequestUnit *)quizListOfPlayer:(NSString *)playerId type:(NSString *)type tags:(NSString *)tags withDelegate:(id<PBActiveQuizList_ResponseHandler>)delegate;
+-(PBRequestUnit *)quizListOfPlayer:(NSString *)playerId type:(NSString *)type tags:(NSString *)tags withBlock:(PBActiveQuizList_ResponseBlock)block;
+-(PBRequestUnit *)quizListOfPlayerAsync:(NSString *)playerId type:(NSString *)type tags:(NSString *)tags withDelegate:(id<PBActiveQuizList_ResponseHandler>)delegate;
+-(PBRequestUnit *)quizListOfPlayerAsync:(NSString *)playerId type:(NSString *)type tags:(NSString *)tags withBlock:(PBActiveQuizList_ResponseBlock)block;
 
 /**
  Get detail of a quiz.
@@ -966,17 +995,331 @@
 -(PBRequestUnit *)pushNotificationCouponForPlayerAsync:(NSString *)playerId refId:(NSString *)refId message:(NSString *)message template:(NSString *)templateId withBlock:(PBResponseBlock)block;
 
 /**
+ StoreOrganization
+ */
+-(PBRequestUnit *)storeOrganizeList:(NSMutableDictionary *)options withDelegate:(id<PBStoreOrganize_ResponseHandler>)delegate;
+-(PBRequestUnit *)storeOrganizeList:(NSMutableDictionary *)options withBlock:(PBStoreOrganize_ResponseBlock)block;
+-(PBRequestUnit *)storeOrganizeListAsync:(NSMutableDictionary *)options withDelegate:(id<PBStoreOrganize_ResponseHandler>)delegate;
+-(PBRequestUnit *)storeOrganizeListAsync:(NSMutableDictionary *)options  withBlock:(PBStoreOrganize_ResponseBlock)block;
+-(PBRequestUnit *)storeOrganizeListAsync_:(NSMutableDictionary *)options withBlock:(PBStoreOrganize_ResponseBlock)block;
+
+-(PBRequestUnit *)storeNodeList:(NSMutableDictionary *)options withDelegate:(id<PBNodeOrganize_ResponseHandler>)delegate;
+-(PBRequestUnit *)storeNodeList:(NSMutableDictionary *)options withBlock:(PBNodeOrganize_ResponseBlock)block;
+-(PBRequestUnit *)storeNodeListAsync:(NSMutableDictionary *)options withDelegate:(id<PBNodeOrganize_ResponseHandler>)delegate;
+-(PBRequestUnit *)storeNodeListAsync:(NSMutableDictionary *)options  withBlock:(PBNodeOrganize_ResponseBlock)block;
+-(PBRequestUnit *)storeNodeListAsync_:(NSMutableDictionary *)options withBlock:(PBNodeOrganize_ResponseBlock)block;
+
+/**
+ Sale History
+ */
+-(PBRequestUnit *)saleHistory:(NSString *)node_id count:(NSString *)count options:(NSMutableDictionary *)options withDelegate:(id<PBSaleHistory_ResponseHandler>)delegate;
+-(PBRequestUnit *)saleHistory:(NSString *)node_id count:(NSString *)count options:(NSMutableDictionary *)options withBlock:(PBSaleHistory_ResponseBlock)block;
+-(PBRequestUnit *)saleHistoryAsync:(NSString *)node_id count:(NSString *)count options:(NSMutableDictionary *)options withDelegate:(id<PBSaleHistory_ResponseHandler>)delegate;
+-(PBRequestUnit *)saleHistoryAsync:(NSString *)node_id count:(NSString *)count options:(NSMutableDictionary *)options  withBlock:(PBSaleHistory_ResponseBlock)block;
+-(PBRequestUnit *)saleHistoryAsync_:(NSString *)node_id count:(NSString *)count options:(NSMutableDictionary *)options withBlock:(PBSaleHistory_ResponseBlock)block;
+
+/**
+ Sale Board
+ */
+-(PBRequestUnit *)saleBoard:(NSString *)node_id layer:(NSString *)layer options:(NSMutableDictionary *)options withDelegate:(id<PBSaleBoard_ResponseHandler>)delegate;
+-(PBRequestUnit *)saleBoard:(NSString *)node_id layer:(NSString *)layer options:(NSMutableDictionary *)options withBlock:(PBSaleBoard_ResponseBlock)block;
+-(PBRequestUnit *)saleBoardAsync:(NSString *)node_id layer:(NSString *)layer options:(NSMutableDictionary *)options withDelegate:(id<PBSaleBoard_ResponseHandler>)delegate;
+-(PBRequestUnit *)saleBoardAsync:(NSString *)node_id layer:(NSString *)layer options:(NSMutableDictionary *)options  withBlock:(PBSaleBoard_ResponseBlock)block;
+-(PBRequestUnit *)saleBoardAsync_:(NSString *)node_id layer:(NSString *)layer options:(NSMutableDictionary *)options withBlock:(PBSaleBoard_ResponseBlock)block;
+
+/**
+ LeaderBoard
+ */
+-(PBRequestUnit *)leaderBoard:(NSString *)node_id rank:(NSString *)rank options:(NSMutableDictionary *)options withDelegate:(id<PBLeaderBoard_ResponseHandler>)delegate;
+-(PBRequestUnit *)leaderBoard:(NSString *)node_id rank:(NSString *)rank options:(NSMutableDictionary *)options withBlock:(PBLeaderBoard_ResponseBlock)block;
+-(PBRequestUnit *)leaderBoardAsync:(NSString *)node_id rank:(NSString *)rank options:(NSMutableDictionary *)options withDelegate:(id<PBLeaderBoard_ResponseHandler>)delegate;
+-(PBRequestUnit *)leaderBoardAsync:(NSString *)node_id rank:(NSString *)rank options:(NSMutableDictionary *)options  withBlock:(PBLeaderBoard_ResponseBlock)block;
+-(PBRequestUnit *)leaderBoardAsync_:(NSString *)node_id rank:(NSString *)rank options:(NSMutableDictionary *)options withBlock:(PBLeaderBoard_ResponseBlock)block;
+
+/**
+ LeaderBoard By Action
+ */
+-(PBRequestUnit *)leaderBoardByAction:(NSString *)node_id action:(NSString *)action parameter:(NSString *)parameter options:(NSMutableDictionary *)options withDelegate:(id<PBLeaderBoard_ResponseHandler>)delegate;
+-(PBRequestUnit *)leaderBoardByAction:(NSString *)node_id action:(NSString *)action parameter:(NSString *)parameter options:(NSMutableDictionary *)options withBlock:(PBLeaderBoard_ResponseBlock)block;
+-(PBRequestUnit *)leaderBoardByActionAsync:(NSString *)node_id action:(NSString *)action parameter:(NSString *)parameter options:(NSMutableDictionary *)options withDelegate:(id<PBLeaderBoard_ResponseHandler>)delegate;
+-(PBRequestUnit *)leaderBoardByActionAsync:(NSString *)node_id action:(NSString *)action parameter:(NSString *)parameter options:(NSMutableDictionary *)options  withBlock:(PBLeaderBoard_ResponseBlock)block;
+-(PBRequestUnit *)leaderBoardByActionAsync_:(NSString *)node_id action:(NSString *)action parameter:(NSString *)parameter options:(NSMutableDictionary *)options withBlock:(PBLeaderBoard_ResponseBlock)block;
+
+
+/**
+Get Child
+ */
+-(PBRequestUnit *)childNodeList:(NSString *)node_id layer:(NSString *)layer withDelegate:(id<PBNodeOrganize_ResponseHandler>)delegate;
+-(PBRequestUnit *)childNodeList:(NSString *)node_id layer:(NSString *)layer withBlock:(PBNodeOrganize_ResponseBlock)block;
+-(PBRequestUnit *)childNodeListAsync:(NSString *)node_id layer:(NSString *)layer withDelegate:(id<PBNodeOrganize_ResponseHandler>)delegate;
+-(PBRequestUnit *)childNodeListAsync:(NSString *)node_id layer:(NSString *)layer  withBlock:(PBNodeOrganize_ResponseBlock)block;
+-(PBRequestUnit *)childNodeListAsync_:(NSString *)node_id layer:(NSString *)layer withBlock:(PBNodeOrganize_ResponseBlock)block;
+
+/**
+ Get Content
+ */
+-(PBRequestUnit *)getContent:(NSMutableDictionary *)options withDelegate:(id<PBContent_ResponseHandler>)delegate;
+-(PBRequestUnit *)getContent:(NSMutableDictionary *)options withBlock:(PBContent_ResponseBlock)block;
+-(PBRequestUnit *)getContentAsync:(NSMutableDictionary *)options withDelegate:(id<PBContent_ResponseHandler>)delegate;
+-(PBRequestUnit *)getContentAsync:(NSMutableDictionary *)options  withBlock:(PBContent_ResponseBlock)block;
+-(PBRequestUnit *)getContentAsync_:(NSMutableDictionary *)options withBlock:(PBContent_ResponseBlock)block;
+
+/**
+Count Content options : category , player_exclude
+ */
+-(PBRequestUnit *)countContent:(NSMutableDictionary *)options withDelegate:(id<PBContent_ResponseHandler>)delegate;
+-(PBRequestUnit *)countContent:(NSMutableDictionary *)options withBlock:(PBContent_ResponseBlock)block;
+-(PBRequestUnit *)countContentAsync:(NSMutableDictionary *)options withDelegate:(id<PBContent_ResponseHandler>)delegate;
+-(PBRequestUnit *)countContentAsync:(NSMutableDictionary *)options  withBlock:(PBContent_ResponseBlock)block;
+-(PBRequestUnit *)countContentAsync_:(NSMutableDictionary *)options withBlock:(PBContent_ResponseBlock)block;
+
+/**
+ Create Content
+ */
+-(PBRequestUnit *)createContentWithTitle:(NSString *)title summary:(NSString *)summary detail:(NSString *)detail andDelegate:(id<PBResultStatus_ResponseHandler>)delegate, ...;
+-(PBRequestUnit *)createContentWithTitle:(NSString *)title summary:(NSString *)summary detail:(NSString *)detail andBlock:(PBResultStatus_ResponseBlock)block, ...;
+-(PBRequestUnit *)createContentWithTitleAsync:(NSString *)title summary:(NSString *)summary detail:(NSString *)detail andDelegate:(id<PBResultStatus_ResponseHandler>)delegate, ...;
+-(PBRequestUnit *)createContentWithTitleAsync:(NSString *)title summary:(NSString *)summary detail:(NSString *)detail andBlock:(PBResultStatus_ResponseBlock)block, ...;
+-(PBRequestUnit *)createContentWithTitleAsync_:(NSString *)title summary:(NSString *)summary detail:(NSString *)detail andBlock:(PBAsyncURLRequestResponseBlock)block, ...;
+
+/**
+ Update Content
+ */
+-(PBRequestUnit *)updateContent:(NSString *)content_id andDelegate:(id<PBResultStatus_ResponseHandler>)delegate, ...;
+-(PBRequestUnit *)updateContent:(NSString *)content_id andBlock:(PBResultStatus_ResponseBlock)block, ...;
+-(PBRequestUnit *)updateContentAsync:(NSString *)content_id andDelegate:(id<PBResultStatus_ResponseHandler>)delegate, ...;
+-(PBRequestUnit *)updateContentAsync:(NSString *)content_id andBlock:(PBResultStatus_ResponseBlock)block, ...;
+-(PBRequestUnit *)updateContentAsync_:(NSString *)content_id andBlock:(PBAsyncURLRequestResponseBlock)block, ...;
+
+/**
+ Delete Content
+ */
+-(PBRequestUnit *)deleteContent:(NSString *)content_id andDelegate:(id<PBResultStatus_ResponseHandler>)delegate, ...;
+-(PBRequestUnit *)deleteContent:(NSString *)content_id andBlock:(PBResultStatus_ResponseBlock)block, ...;
+-(PBRequestUnit *)deleteContentAsync:(NSString *)content_id andDelegate:(id<PBResultStatus_ResponseHandler>)delegate, ...;
+-(PBRequestUnit *)deleteContentAsync:(NSString *)content_id andBlock:(PBResultStatus_ResponseBlock)block, ...;
+-(PBRequestUnit *)deleteContentAsync_:(NSString *)content_id andBlock:(PBAsyncURLRequestResponseBlock)block, ...;
+
+/**
+ Action Like
+ */
+-(PBRequestUnit *)actionLikeContent:(NSString *)content_id player_id:(NSString *)player_id andDelegate:(id<PBResultStatus_ResponseHandler>)delegate, ...;
+-(PBRequestUnit *)actionLikeContent:(NSString *)content_id player_id:(NSString *)player_id andBlock:(PBResultStatus_ResponseBlock)block, ...;
+-(PBRequestUnit *)actionLikeContentAsync:(NSString *)content_id player_id:(NSString *)player_id andDelegate:(id<PBResultStatus_ResponseHandler>)delegate, ...;
+-(PBRequestUnit *)actionLikeContentAsync:(NSString *)content_id player_id:(NSString *)player_id andBlock:(PBResultStatus_ResponseBlock)block, ...;
+-(PBRequestUnit *)actionLikeContentAsync_:(NSString *)content_id player_id:(NSString *)player_id andBlock:(PBAsyncURLRequestResponseBlock)block, ...;
+
+/**
+ Action DisLike
+ */
+-(PBRequestUnit *)actionDisLikeContent:(NSString *)content_id player_id:(NSString *)player_id andDelegate:(id<PBResultStatus_ResponseHandler>)delegate, ...;
+-(PBRequestUnit *)actionDisLikeContent:(NSString *)content_id player_id:(NSString *)player_id andBlock:(PBResultStatus_ResponseBlock)block, ...;
+-(PBRequestUnit *)actionDisLikeContentAsync:(NSString *)content_id player_id:(NSString *)player_id andDelegate:(id<PBResultStatus_ResponseHandler>)delegate, ...;
+-(PBRequestUnit *)actionDisLikeContentAsync:(NSString *)content_id player_id:(NSString *)player_id andBlock:(PBResultStatus_ResponseBlock)block, ...;
+-(PBRequestUnit *)actionDisLikeContentAsync_:(NSString *)content_id player_id:(NSString *)player_id andBlock:(PBAsyncURLRequestResponseBlock)block, ...;
+
+/**
+ Give Feedback
+ */
+-(PBRequestUnit *)giveFeedbackContent:(NSString *)content_id player_id:(NSString *)player_id feedback:(NSString *)feedback andDelegate:(id<PBResultStatus_ResponseHandler>)delegate, ...;
+-(PBRequestUnit *)giveFeedbackContent:(NSString *)content_id player_id:(NSString *)player_id feedback:(NSString *)feedback andBlock:(PBResultStatus_ResponseBlock)block, ...;
+-(PBRequestUnit *)giveFeedbackContentAsync:(NSString *)content_id player_id:(NSString *)player_id feedback:(NSString *)feedback andDelegate:(id<PBResultStatus_ResponseHandler>)delegate, ...;
+-(PBRequestUnit *)giveFeedbackContentAsync:(NSString *)content_id player_id:(NSString *)player_id feedback:(NSString *)feedback andBlock:(PBResultStatus_ResponseBlock)block, ...;
+-(PBRequestUnit *)giveFeedbackContentAsync_:(NSString *)content_id player_id:(NSString *)player_id feedback:(NSString *)feedback andBlock:(PBAsyncURLRequestResponseBlock)block, ...;
+
+
+/**
+ GetContent Category
+ */
+-(PBRequestUnit *)getContentCategory:(NSMutableDictionary *)options withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)getContentCategory:(NSMutableDictionary *)options withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)getContentCategoryAsync:(NSMutableDictionary *)options withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)getContentCategoryAsync:(NSMutableDictionary *)options  withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)getContentCategoryAsync_:(NSMutableDictionary *)options withBlock:(PBResponseBlock)block;
+
+
+
+/**
+ CreateContent Category
+ */
+-(PBRequestUnit *)createContentCategory:(NSString *)name withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)createContentCategory:(NSString *)name withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)createContentCategoryAsync:(NSString *)name withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)createContentCategoryAsync:(NSString *)name withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)createContentCategoryAsync_:(NSString *)name withBlock:(PBResponseBlock)block;
+
+/**
+ UpdateContent Category
+ */
+-(PBRequestUnit *)updateContentCategory:(NSString *)category_id name:(NSString *)name withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)updateContentCategory:(NSString *)category_id name:(NSString *)name withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)updateContentCategoryAsync:(NSString *)category_id name:(NSString *)name withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)updateContentCategoryAsync:(NSString *)category_id name:(NSString *)name withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)updateContentCategoryAsync_:(NSString *)category_id name:(NSString *)name withBlock:(PBResponseBlock)block;
+
+/**
+ DeleteContent Category
+ */
+-(PBRequestUnit *)deleteContentCategory:(NSString *)category_id withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)deleteContentCategory:(NSString *)category_id withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)deleteContentCategoryAsync:(NSString *)category_id withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)deleteContentCategoryAsync:(NSString *)category_id withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)deleteContentCategoryAsync_:(NSString *)category_id withBlock:(PBResponseBlock)block;
+
+
+/**
+ Get Associated Node
+ */
+-(PBRequestUnit *)getAssociatedNode:(NSString *)playerId withDelegate:(id<PBAssociatedNode_ResponseHandler>)delegate;
+-(PBRequestUnit *)getAssociatedNode:(NSString *)playerId withBlock:(PBAssociatedNode_ResponseBlock)block;
+-(PBRequestUnit *)getAssociatedNodeAsync:(NSString *)playerId withDelegate:(id<PBAssociatedNode_ResponseHandler>)delegate;
+-(PBRequestUnit *)getAssociatedNodeAsync:(NSString *)playerId withBlock:(PBAssociatedNode_ResponseBlock)block;
+
+
+/**
+ Get Player Role
+ */
+-(PBRequestUnit *)playerRole:(NSString *)playerId nodeId:(NSString *)node withDelegate:(id<PBPlayerRole_ResponseHandler>)delegate;
+-(PBRequestUnit *)playerRole:(NSString *)playerId nodeId:(NSString *)node withBlock:(PBPlayerRole_ResponseBlock)block;
+-(PBRequestUnit *)playerRoleAsync:(NSString *)playerId nodeId:(NSString *)node withDelegate:(id<PBPlayerRole_ResponseHandler>)delegate;
+-(PBRequestUnit *)playerRoleAsync:(NSString *)playerId nodeId:(NSString *)node withBlock:(PBPlayerRole_ResponseBlock)block;
+
+/**
+ Get Player List From Node
+ */
+-(PBRequestUnit *)playerListFromNode:(NSString *)node_id role:(NSString *)role withDelegate:(id<PBPlayerListFromNode_ResponseHandler>)delegate;
+-(PBRequestUnit *)playerListFromNode:(NSString *)node_id role:(NSString *)role withBlock:(PBPlayerListFromNode_ResponseBlock)block;
+-(PBRequestUnit *)playerListFromNodeAsync:(NSString *)node_id role:(NSString *)role withDelegate:(id<PBPlayerListFromNode_ResponseHandler>)delegate;
+-(PBRequestUnit *)playerListFromNodeAsync:(NSString *)node_id role:(NSString *)role withBlock:(PBPlayerListFromNode_ResponseBlock)block;
+
+/**
+Add Player for Node.
+*/
+-(PBRequestUnit *)addPlayerToNode:(NSString *)nodeId playerId:(NSString *)playerId withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)addPlayerToNode:(NSString *)nodeId playerId:(NSString *)playerId withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)addPlayerToNodeAsync:(NSString *)nodeId playerId:(NSString *)playerId withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)addPlayerToNodeAsync:(NSString *)nodeId playerId:(NSString *)playerId withBlock:(PBResponseBlock)block;
+
+/**
+ Remove Player for Node.
+ */
+-(PBRequestUnit *)removePlayerToNode:(NSString *)nodeId playerId:(NSString *)playerId withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)removePlayerToNode:(NSString *)nodeId playerId:(NSString *)playerId withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)removePlayerToNodeAsync:(NSString *)nodeId playerId:(NSString *)playerId withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)removePlayerToNodeAsync:(NSString *)nodeId playerId:(NSString *)playerId withBlock:(PBResponseBlock)block;
+
+/**
+ Set Player Role.
+ */
+-(PBRequestUnit *)setPlayerRole:(NSString *)nodeId playerId:(NSString *)playerId role:(NSString *)role withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)setPlayerRole:(NSString *)nodeId playerId:(NSString *)playerId role:(NSString *)role withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)setPlayerRoleAsync:(NSString *)nodeId playerId:(NSString *)playerId role:(NSString *)role withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)setPlayerRoleAsync:(NSString *)nodeId playerId:(NSString *)playerId role:(NSString *)role withBlock:(PBResponseBlock)block;
+
+/**
+ UnSet Player Role.
+ */
+-(PBRequestUnit *)unsetPlayerRole:(NSString *)nodeId playerId:(NSString *)playerId role:(NSString *)role withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)unsetPlayerRole:(NSString *)nodeId playerId:(NSString *)playerId role:(NSString *)role withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)unsetPlayerRoleAsync:(NSString *)nodeId playerId:(NSString *)playerId role:(NSString *)role withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)unsetPlayerRoleAsync:(NSString *)nodeId playerId:(NSString *)playerId role:(NSString *)role withBlock:(PBResponseBlock)block;
+
+/**
+ Player Auth
+ */
+-(PBRequestUnit *)playerAuthForPlayerId:(NSString *)password options:(NSMutableDictionary *)options withDelegate:(id<PBPlayer_ResponseHandler>)delegate;
+-(PBRequestUnit *)playerAuthForPlayerId:(NSString *)password options:(NSMutableDictionary *)options withBlock:(PBPlayer_ResponseBlock)block;
+-(PBRequestUnit *)playerAuthForPlayerIdAsync:(NSString *)password options:(NSMutableDictionary *)options withDelegate:(id<PBPlayer_ResponseHandler>)delegate;
+-(PBRequestUnit *)playerAuthForPlayerIdAsync:(NSString *)password options:(NSMutableDictionary *)options withBlock:(PBPlayer_ResponseBlock)block;
+-(PBRequestUnit *)playerAuthForPlayerIdAsync_:(NSString *)password options:(NSMutableDictionary *)options withBlock:(PBPlayer_ResponseBlock)block;
+
+/**
+Forgot Password
+ */
+-(PBRequestUnit *)forgotPasswordForEmail:(NSString *)email withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)forgotPasswordForEmail:(NSString *)email withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)forgotPasswordForEmailAsync:(NSString *)email withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)forgotPasswordForEmailAsync:(NSString *)email withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)forgotPasswordForEmailAsync_:(NSString *)email withBlock:(PBResponseBlock)block;
+
+/**
+ Request OTP
+ */
+-(PBRequestUnit *)requestOTP:(NSString *)player_id deviceToken:(NSString *)deviceToken description:(NSString *)description deviceName:(NSString *)deviceName os_type:(NSString *)os_type  withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)requestOTP:(NSString *)player_id deviceToken:(NSString *)deviceToken description:(NSString *)description deviceName:(NSString *)deviceName os_type:(NSString *)os_type withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)requestOTPAsync:(NSString *)player_id deviceToken:(NSString *)deviceToken description:(NSString *)description deviceName:(NSString *)deviceName os_type:(NSString *)os_type withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)requestOTPAsync:(NSString *)player_id deviceToken:(NSString *)deviceToken description:(NSString *)description deviceName:(NSString *)deviceName os_type:(NSString *)os_type withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)requestOTPAsync_:(NSString *)player_id deviceToken:(NSString *)deviceToken description:(NSString *)description deviceName:(NSString *)deviceName os_type:(NSString *)os_type withBlock:(PBResponseBlock)block;
+
+/**
+ Prefer OTP
+ */
+-(PBRequestUnit *)performOTP:(NSString *)player_id code:(NSString *)code withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)performOTP:(NSString *)player_id code:(NSString *)code withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)performOTPAsync:(NSString *)player_id code:(NSString *)code withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)performOTPAsync:(NSString *)player_id code:(NSString *)code withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)performOTPAsync_:(NSString *)player_id code:(NSString *)code withBlock:(PBResponseBlock)block;
+
+/**
+Send Email
+ */
+-(PBRequestUnit *)sendEmail:(NSString *)from to:(NSString *)to bcc:(NSString *)bcc subject:(NSString *)subject message:(NSString *)message withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)sendEmail:(NSString *)from to:(NSString *)to bcc:(NSString *)bcc subject:(NSString *)subject message:(NSString *)message withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)sendEmailAsync:(NSString *)from to:(NSString *)to bcc:(NSString *)bcc subject:(NSString *)subject message:(NSString *)message withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)sendEmailAsync:(NSString *)from to:(NSString *)to bcc:(NSString *)bcc subject:(NSString *)subject message:(NSString *)message withBlock:(PBResponseBlock)block;
+
+
+/**
  Register device for push notification.
  */
--(PBRequestUnit *)registerForPushNotification:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)registerForPushNotificationPlayerId:(NSString *)playerId options:(NSDictionary *)options withBlock:(PBResponseBlock)block;
 
 #if TARGET_OS_IOS
+/**
+ ()
+ */
+/**
+ Upload photo
+ */
+-(PBRequestUnit *)uploadImageAsync:(NSData *)image withBlock:(PBResponseBlock)block;
 /**
  Track player with an action.
  */
 -(void)trackPlayer:(NSString *)playerId forAction:(NSString *)action fromView:(UIViewController*)view withBlock:(PBAsyncURLRequestResponseBlock)block;
 
 /**
+ List Active Player Sessions
+ */
+-(PBRequestUnit *)listActiveSessionForPlayer:(NSString *)playerId withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)listActiveSessionForPlayer:(NSString *)playerId withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)listActiveSessionForPlayerAsync:(NSString *)playerId withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)listActiveSessionForPlayerAsync:(NSString *)playerId withBlock:(PBResponseBlock)block;
+/**
+ Find a Player by Session
+ */
+-(PBRequestUnit *)findPlayerBySession:(NSString *)sessionId withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)findPlayerBySession:(NSString *)sessionId withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)findPlayerBySessionAsync:(NSString *)sessionId withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)findPlayerBySessionAsync:(NSString *)sessionId withBlock:(PBResponseBlock)block;
+
+/**
+ Setup Phone // IOS => os_type:IOS // Android => os_type:ANDROID
+ */
+-(PBRequestUnit *)setupPhoneForPlayer:(NSString *)playerId phoneNumber:(NSString *)phoneNumber deviceToken:(NSString *)deviceToken description:(NSString *)description deviceName:(NSString *)deviceName os_type:(NSString *)os_type withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)setupPhoneForPlayer:(NSString *)playerId phoneNumber:(NSString *)phoneNumber deviceToken:(NSString *)deviceToken description:(NSString *)description deviceName:(NSString *)deviceName os_type:(NSString *)os_type  withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)setupPhoneForPlayerAsync:(NSString *)playerId phoneNumber:(NSString *)phoneNumber deviceToken:(NSString *)deviceToken description:(NSString *)description deviceName:(NSString *)deviceName os_type:(NSString *)os_type  withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)setupPhoneForPlayerAsync:(NSString *)playerId phoneNumber:(NSString *)phoneNumber deviceToken:(NSString *)deviceToken description:(NSString *)description deviceName:(NSString *)deviceName os_type:(NSString *)os_type  withBlock:(PBResponseBlock)block;
+/**
+RequestOTPCode
+*/
+-(PBRequestUnit *)requestOTPCodeForPlayer:(NSString *)playerId withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)requestOTPCodeForPlayer:(NSString *)playerId withBlock:(PBResponseBlock)block;
+-(PBRequestUnit *)requestOTPCodeForPlayerAsync:(NSString *)playerId withDelegate:(id<PBResponseHandler>)delegate;
+-(PBRequestUnit *)requestOTPCodeForPlayerAsync:(NSString *)playerId withBlock:(PBResponseBlock)block;
+
+ 
+ 
+ /**
  Do player for a given action.
  This is similar to track but will get payload back in response.
  */
