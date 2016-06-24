@@ -11,7 +11,7 @@ release:
 	ant release
 
 install:
-	adb install -r bin/NativeProjectBootstrap-release.apk
+	adb install -r bin/NativeProjectBootstrap-debug.apk
 
 clean:
 	ant clean
