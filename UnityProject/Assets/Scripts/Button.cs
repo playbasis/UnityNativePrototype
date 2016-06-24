@@ -7,7 +7,7 @@ using Playbasis.Wrapper.Log;
 public class Button : MonoBehaviour
 {
 	private float m_timer = 0.0f;
-	private float buttonHeight = 30;
+	private float buttonHeight;
 	private float buttonYGap = 7;
 
 	void Start()
@@ -21,6 +21,8 @@ public class Button : MonoBehaviour
 		#if UNITY_STANDALONE_OSX
 		PlaybasisWrapper.loadMacOSXLib();
 		#endif
+		
+		buttonHeight = Screen.height * 0.3f;
 
 		PlaybasisWrapper.initialize();
 	}
@@ -34,14 +36,15 @@ public class Button : MonoBehaviour
 	{
 		GUIStyle style = new GUIStyle();
 		style.alignment = TextAnchor.MiddleCenter;
+        style.fontSize = 30;
 		GUI.Label(new Rect(0, Screen.height * 0.1f, Screen.width, 20.0f), "This is Unity (" + m_timer.ToString("0.00") + ")!", style);
 
-		if (GUI.Button(new Rect(Screen.width * 0.25f, Screen.height * 0.2f, Screen.width * 0.5f, buttonHeight), "Switch to native.."))
+		if (GUI.Button(new Rect(Screen.width * 0.25f, Screen.height * 0.2f, Screen.width * 0.5f, buttonHeight), "Switch to native..", style))
 		{
 			Debug.Log("Switching to native..");
 			UnityNativeInterface.SwitchToNative();
 		}
-		else if (GUI.Button(new Rect(Screen.width * 0.25f, Screen.height * 0.2f + buttonHeight + buttonYGap, Screen.width * 0.5f, buttonHeight), "Authenticate app"))
+		else if (GUI.Button(new Rect(Screen.width * 0.25f, Screen.height * 0.2f + buttonHeight + buttonYGap, Screen.width * 0.5f, buttonHeight), "Authenticate app", style))
 		{
 			Debug.Log("Authenticate app");
 			#if UNITY_IOS || UNITY_STANDALONE_OSX
@@ -50,7 +53,7 @@ public class Button : MonoBehaviour
 			PlaybasisWrapper.auth("2410120595", "0b98a945d6ba51153133767a14654c79", "io.wasin.testplugin", new OnResultDelegate(this.OnAuthResult));
 			#endif
 		}
-		else if (GUI.Button(new Rect(Screen.width * 0.25f, Screen.height * 0.2f + buttonHeight*2 + buttonYGap*2, Screen.width * 0.5f, buttonHeight), "Get player info"))
+		else if (GUI.Button(new Rect(Screen.width * 0.25f, Screen.height * 0.2f + buttonHeight*2 + buttonYGap*2, Screen.width * 0.5f, buttonHeight), "Get player info", style))
 		{
 			Debug.Log("Get player info");
 			PlaybasisWrapper.player("jontestuser", new OnUserDataResultDelegate<playerWr>(this.OnPlayerResult));

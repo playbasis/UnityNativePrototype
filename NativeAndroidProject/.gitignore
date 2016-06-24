@@ -2,7 +2,6 @@
 *.ap_
 *.dex
 *.class
-libs/
 bin/
 gen/
 proguard/
