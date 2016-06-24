@@ -10,5 +10,11 @@
         android:layout_height="wrap_content"
         android:onClick="onBackToUnityClicked"
         android:text="Back to Unity" />
+    <Button
+        android:id="@+id/showAnotherScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onShowAnotherScreenClicked"
+        android:text="Show another screen" />
 
 </TableLayout>

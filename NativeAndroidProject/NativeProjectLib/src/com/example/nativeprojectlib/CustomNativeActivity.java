@@ -7,6 +7,7 @@ import android.util.Log;
 import android.app.NativeActivity;
 import android.content.res.Configuration;
 import android.graphics.PixelFormat;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -44,6 +45,12 @@ public class CustomNativeActivity extends UnityPlayerNativeActivity
 				Log.i("UnityPlayerNativeActivity", "authenticate failed");
 			}
 		});
+	}
+	
+	public void onShowAnotherScreenClicked(View view)
+	{
+		Log.i("UnityPlayerNativeActivity", "Show another screen");
+		startActivity(new Intent(CustomNativeActivity.this, AnotherActivity.class));
 	}
 
 	public void onBackToUnityClicked(View view)

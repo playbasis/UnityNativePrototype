@@ -172,7 +172,7 @@ typedef enum
 ///--------------------------------------
 @interface PBPlayerList_Response : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *players;
+@property (strong, nonatomic, readonly) NSArray<PBPlayer_Response*> *players;
 
 +(PBPlayerList_Response*)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -196,7 +196,7 @@ typedef enum
 ///--------------------------------------
 @interface PBPoint_Response : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray* point;
+@property (strong, nonatomic, readonly) NSArray<PBPoint*>* point;
 
 +(PBPoint_Response*)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -207,7 +207,7 @@ typedef enum
 ///--------------------------------------
 @interface PBPoints_Response : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray* points;
+@property (strong, nonatomic, readonly) NSArray<PBPoint*>* points;
 
 +(PBPoints_Response*)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -225,8 +225,6 @@ typedef enum
 @property (strong, nonatomic, readonly) NSString* description_;
 @property (strong, nonatomic, readonly) NSString* hint;
 @property (nonatomic, readonly) BOOL sponsor;
-@property (nonatomic, readonly) BOOL claim;
-@property (nonatomic, readonly) BOOL redeem;
 
 +(PBBadge_Response*)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -237,7 +235,7 @@ typedef enum
 ///--------------------------------------
 @interface PBBadges_Response : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray* badges;
+@property (strong, nonatomic, readonly) NSArray<PBBadge_Response*>* badges;
 
 +(PBBadges_Response*)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -266,7 +264,7 @@ typedef enum
 ///--------------------------------------
 @interface PBPlayerBadges_Response : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *playerBadges;
+@property (strong, nonatomic, readonly) NSArray<PBPlayerBadge*> *playerBadges;
 
 +(PBPlayerBadges_Response*)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -417,7 +415,7 @@ typedef enum
 ///--------------------------------------
 @interface PBLevels_Response : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *levels;
+@property (strong, nonatomic, readonly) NSArray<PBLevel_Response*> *levels;
 
 +(PBLevels_Response*)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -442,7 +440,7 @@ typedef enum
 ///--------------------------------------
 @interface PBRank_Response : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *ranks;
+@property (strong, nonatomic, readonly) NSArray<PBRank*> *ranks;
 
 +(PBRank_Response*)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -456,7 +454,7 @@ typedef enum
 /**
  Use this key to access ranks according to each point type.
  */
-@property (strong, nonatomic, readonly) NSArray *rankByKeys;
+@property (strong, nonatomic, readonly) NSArray<PBRank_Response*> *rankByKeys;
 
 /**
  Array contains ranks by each point type.
@@ -511,7 +509,7 @@ typedef enum
 ///--------------------------------------
 @interface PBCustoms : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *customs;
+@property (strong, nonatomic, readonly) NSArray<PBCustom*> *customs;
 
 +(PBCustoms*)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -534,7 +532,7 @@ typedef enum
 ///--------------------------------------
 @interface PBRedeemBadges : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *list;
+@property (strong, nonatomic, readonly) NSArray<PBRedeemBadge*> *list;
 
 +(PBRedeemBadges*)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -580,6 +578,7 @@ typedef enum
 @interface PBGoodsInfo_Response : PBBase_Response
 
 @property (strong, nonatomic, readonly) PBGoods *goods;
+@property (nonatomic, readonly) NSUInteger amount;
 @property (nonatomic, readonly) NSUInteger perUser;
 @property (nonatomic, readonly) BOOL isGroup;
 
@@ -592,7 +591,7 @@ typedef enum
 ///--------------------------------------
 @interface PBGoodsListInfo_Response : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *goodsList;
+@property (strong, nonatomic, readonly) NSArray<PBGoodsInfo_Response*> *goodsList;
 
 +(PBGoodsListInfo_Response*)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -686,7 +685,7 @@ typedef enum
 ///--------------------------------------
 @interface PBQuestRewardArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *questRewards;
+@property (strong, nonatomic, readonly) NSArray<PBQuestReward*> *questRewards;
 
 +(PBQuestRewardArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -708,7 +707,7 @@ typedef enum
 ///--------------------------------------
 @interface PBRewardArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *rewards;
+@property (strong, nonatomic, readonly) NSArray<PBReward*> *rewards;
 
 +(PBRewardArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -734,7 +733,7 @@ typedef enum
 ///--------------------------------------
 @interface PBIncompleteArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *incompletions;
+@property (strong, nonatomic, readonly) NSArray<PBIncomplete*> *incompletions;
 
 +(PBIncompleteArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -756,16 +755,41 @@ typedef enum
 @end
 
 ///--------------------------------------
+/// URL
+///--------------------------------------
+@interface PBUrl : PBBase_Response
+
+@property (strong, nonatomic, readonly) NSString *operation;
+@property (strong, nonatomic, readonly) NSString *completionString;
+
++(PBUrl *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+
+@end
+
+///--------------------------------------
+/// FilteredParam
+///--------------------------------------
+@interface PBFilteredParam : PBBase_Response
+
+@property (strong, nonatomic, readonly) PBUrl *url;
+
++(PBFilteredParam *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
+
+@end
+
+///--------------------------------------
 /// Completion
 ///--------------------------------------
 @interface PBCompletion : PBBase_Response
 
+@property (strong, nonatomic, readonly) NSString *completionOp;
 @property (strong, nonatomic, readonly) NSString *completionFilter;
 @property (strong, nonatomic, readonly) NSString *completionValue;
 @property (strong, nonatomic, readonly) NSString *completionId;
 @property (strong, nonatomic, readonly) NSString *completionType;
 @property (strong, nonatomic, readonly) NSString *completionElementId;
 @property (strong, nonatomic, readonly) NSString *completionTitle;
+@property (strong, nonatomic, readonly) PBFilteredParam *filteredParam;
 @property (strong, nonatomic, readonly) PBCompletionData *completionData;
 
 +(PBCompletion *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
@@ -777,7 +801,7 @@ typedef enum
 ///--------------------------------------
 @interface PBCompletionArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *completions;
+@property (strong, nonatomic, readonly) NSArray<PBCompletion*> *completions;
 
 +(PBCompletionArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -801,7 +825,7 @@ typedef enum
 ///--------------------------------------
 @interface PBPendingArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *pendings;
+@property (strong, nonatomic, readonly) NSArray<PBPending*> *pendings;
 
 +(PBPendingArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -830,7 +854,7 @@ typedef enum
 ///--------------------------------------
 @interface PBMissionBasicArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *missionBasics;
+@property (strong, nonatomic, readonly) NSArray<PBMissionBasic*> *missionBasics;
 
 +(PBMissionBasicArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -855,7 +879,7 @@ typedef enum
 ///--------------------------------------
 @interface PBMissionArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *missions;
+@property (strong, nonatomic, readonly) NSArray<PBMission*> *missions;
 
 +(PBMissionArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -894,7 +918,7 @@ typedef enum
 ///--------------------------------------
 @interface PBConditionArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *conditions;
+@property (strong, nonatomic, readonly) NSArray<PBCondition*> *conditions;
 
 +(PBConditionArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -917,6 +941,7 @@ typedef enum
 @property (strong, nonatomic, readonly) NSDate *dateAdded;
 @property (strong, nonatomic, readonly) NSString *clientId;
 @property (strong, nonatomic, readonly) NSString *siteId;
+@property (strong, nonatomic, readonly) PBConditionArray* conditions;
 @property (strong, nonatomic, readonly) NSDate *dateModified;
 @property (strong, nonatomic, readonly) NSString *questId;
 
@@ -927,10 +952,9 @@ typedef enum
 ///--------------------------------------
 /// Quest Info - Response
 ///--------------------------------------
-@interface PBQuestInfo_Response : PBQuestBasic
+@interface PBQuestInfo_Response : PBBase_Response
 
 @property (strong, nonatomic, readonly) PBQuestBasic *questBasic;
-@property (strong, nonatomic, readonly) PBConditionArray *conditions;
 
 +(PBQuestInfo_Response *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -977,7 +1001,7 @@ typedef enum
 ///--------------------------------------
 @interface PBQuestArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *quests;
+@property (strong, nonatomic, readonly) NSArray<PBQuestBasic*> *quests;
 
 +(PBQuestArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1032,7 +1056,7 @@ typedef enum
 ///--------------------------------------
 @interface PBConfigArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *configs;
+@property (strong, nonatomic, readonly) NSArray<PBConfig*> *configs;
 
 +(PBConfigArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1102,7 +1126,7 @@ typedef enum
 ///--------------------------------------
 @interface PBRuleEvents : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *list;
+@property (strong, nonatomic, readonly) NSArray<PBRuleEvent*> *list;
 
 +(PBRuleEvents *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1132,7 +1156,7 @@ typedef enum
 ///--------------------------------------
 @interface PBRuleEventsMissions : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *list;
+@property (strong, nonatomic, readonly) NSArray<PBRuleEventsMission*> *list;
 
 +(PBRuleEventsMissions *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1160,7 +1184,7 @@ typedef enum
 ///--------------------------------------
 @interface PBRuleEventsQuests : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *list;
+@property (strong, nonatomic, readonly) NSArray<PBRuleEventsQuest*> *list;
 
 +(PBRuleEventsQuests *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1224,7 +1248,7 @@ typedef enum
 ///--------------------------------------
 @interface PBActionConfigArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *actionConfigs;
+@property (strong, nonatomic, readonly) NSArray<PBActionConfig*> *actionConfigs;
 
 +(PBActionConfigArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1265,7 +1289,7 @@ typedef enum
 ///--------------------------------------
 @interface PBRecentPointArray_Response : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *list;
+@property (strong, nonatomic, readonly) NSArray<PBRecentPoint*> *list;
 
 +(PBRecentPointArray_Response *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1392,7 +1416,7 @@ typedef enum
 ///--------------------------------------
 @interface PBGradeRewardCustomArray : PBBase_Response
 
-@property (strong, nonatomic) NSArray *gradeRewardCustoms;
+@property (strong, nonatomic) NSArray<PBGradeRewardCustom*> *gradeRewardCustoms;
 
 +(PBGradeRewardCustomArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1447,7 +1471,7 @@ typedef enum
 ///--------------------------------------
 @interface PBGradeDoneRewardArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *gradeDoneRewards;
+@property (strong, nonatomic, readonly) NSArray<PBGradeDoneReward*> *gradeDoneRewards;
 
 +(PBGradeDoneRewardArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1493,7 +1517,7 @@ typedef enum
 ///--------------------------------------
 @interface PBQuizDoneArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *quizDones;
+@property (strong, nonatomic, readonly) NSArray<PBQuizDone*> *quizDones;
 
 +(PBQuizDoneArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1528,7 +1552,7 @@ typedef enum
 ///--------------------------------------
 @interface PBRedeemGoodsEvents : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *list;
+@property (strong, nonatomic, readonly) NSArray<PBRedeemGoodsEvent*> *list;
 
 +(PBRedeemGoodsEvents *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1551,7 +1575,7 @@ typedef enum
 ///--------------------------------------
 @interface PBGradeArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *grades;
+@property (strong, nonatomic, readonly) NSArray<PBGrade*> *grades;
 
 +(PBGradeArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1596,7 +1620,7 @@ typedef enum
 ///--------------------------------------
 @interface PBQuizBasicArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *quizBasics;
+@property (strong, nonatomic, readonly) NSArray<PBQuizBasic*> *quizBasics;
 
 +(PBQuizBasicArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1653,7 +1677,7 @@ typedef enum
 ///--------------------------------------
 @interface PBQuestionOptionArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *options;
+@property (strong, nonatomic, readonly) NSArray<PBQuestionOption*> *options;
 
 +(PBQuestionOptionArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1706,7 +1730,7 @@ typedef enum
 ///--------------------------------------
 @interface PBQuestionAnsweredOptionArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *answeredOptions;
+@property (strong, nonatomic, readonly) NSArray<PBQuestionAnsweredOption*> *answeredOptions;
 
 +(PBQuestionAnsweredOptionArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1779,7 +1803,7 @@ typedef enum
 ///--------------------------------------
 @interface PBPlayerQuizRankArray : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *list;
+@property (strong, nonatomic, readonly) NSArray<PBPlayerQuizRank*> *list;
 
 +(PBPlayerQuizRankArray *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1843,7 +1867,7 @@ typedef enum
 ///--------------------------------------
 @interface PBQuizPendingGradeRewards : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *list;
+@property (strong, nonatomic, readonly) NSArray<PBQuizPendingGradeReward*> *list;
 
 +(PBQuizPendingGradeRewards *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 
@@ -1884,7 +1908,7 @@ typedef enum
 ///--------------------------------------
 @interface PBQuizPendings : PBBase_Response
 
-@property (strong, nonatomic, readonly) NSArray *list;
+@property (strong, nonatomic, readonly) NSArray<PBQuizPending*> *list;
 
 +(PBQuizPendings *)parseFromDictionary:(const NSDictionary*) jsonResponse startFromFinalLevel:(BOOL)startFromFinalLevel;
 

@@ -2,7 +2,7 @@
 
 SOURCE=bin/nativeprojectlib.jar libs/*.jar
 TARGET_BOOTSTRAP=../NativeProjectBootstrap/libs/
-TARGET_UNITY=../../UnityProject/Assets/Plugins/Android/bin/
+TARGET_UNITY=../../UnityProject/Assets/Plugins/Android/
 CLASSES_REMOVE=$(TARGET_UNITY)classes.jar
 
 all:

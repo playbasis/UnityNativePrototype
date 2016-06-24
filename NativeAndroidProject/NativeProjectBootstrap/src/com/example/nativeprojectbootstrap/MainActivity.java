@@ -11,19 +11,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.content.Intent;
+import com.example.nativeprojectlib.AnotherActivity;
 
 public class MainActivity extends ActionBarActivity {
-
-	public void onBackToUnityClicked(View view)
-	{
-		Log.i("MainActivity", "Returning to Unity (test) ..");
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		int id = getResources().getIdentifier("test_view", "layout", getPackageName());
-		setContentView(id);
+		
+		startActivity(new Intent(MainActivity.this, AnotherActivity.class));
 	}
 
 	@Override
