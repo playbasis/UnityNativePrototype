@@ -36,7 +36,7 @@ public class Button : MonoBehaviour
 	{
 		GUIStyle style = new GUIStyle();
 		style.alignment = TextAnchor.MiddleCenter;
-        style.fontSize = 30;
+        style.fontSize = 60;
 		GUI.Label(new Rect(0, Screen.height * 0.1f, Screen.width, 20.0f), "This is Unity (" + m_timer.ToString("0.00") + ")!", style);
 
 		if (GUI.Button(new Rect(Screen.width * 0.25f, Screen.height * 0.2f, Screen.width * 0.5f, buttonHeight), "Switch to native..", style))
