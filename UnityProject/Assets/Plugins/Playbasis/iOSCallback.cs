@@ -1,48 +1,16 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using Playbasis.Wrapper;
 using System.Runtime.InteropServices;
 using AOT;
 using Playbasis.Wrapper.Model;
+using Playbasis.Wrapper.InternalModel;
+using Playbasis.Wrapper.Helper;
 
 namespace Playbasis.Wrapper.iOS
 {
-	#if UNITY_IOS || UNITY_STANDALONE_OSX
-
-	public class Helper<T>
-		where T : new()
-	{
-		public static void resultCallback(OnResultDelegate userCallback, bool success)
-		{
-			if (userCallback != null)
-			{
-				userCallback(success);
-			}
-		}
-
-		public static void dataResultCallback(OnUserDataResultDelegate<T> userCallback, IntPtr result, int errorCode)
-		{
-			if (result != IntPtr.Zero)
-			{
-				if (userCallback != null)
-				{
-					userCallback(onSuccess_user(result), -1);
-				}
-			}
-			else
-			{
-				if (userCallback != null)
-				{
-					userCallback(new T(), errorCode);
-				}
-			}
-		}
-
-		private static T onSuccess_user(IntPtr result)
-		{
-			return (T)Marshal.PtrToStructure(result, typeof(T));
-		}
-	}
+	#if UNITY_IOS || UNITY_STANDALONE_OSX && !DEBUG_DESKTOP
 
 	// auth()
 	public class OnAuthResult
@@ -52,7 +20,7 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnResultDelegate))]
 		public static void onResult(bool success)
 		{
-			Helper<bool>.resultCallback(userCallback, success);
+			Helper<bool, bool>.resultCallback(userCallback, success);
 		}
 	}
 
@@ -64,7 +32,7 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnResultDelegate))]
 		public static void onResult(bool success)
 		{
-			Helper<bool>.resultCallback(userCallback, success);
+			Helper<bool, bool>.resultCallback(userCallback, success);
 		}
 	}
 
@@ -76,7 +44,7 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnResultDelegate))]
 		public static void onResult(bool success)
 		{
-			Helper<bool>.resultCallback(userCallback, success);
+			Helper<bool, bool>.resultCallback(userCallback, success);
 		}
 	}
 
@@ -88,7 +56,7 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnResultDelegate))]
 		public static void onResult(bool success)
 		{
-			Helper<bool>.resultCallback(userCallback, success);
+			Helper<bool, bool>.resultCallback(userCallback, success);
 		}
 	}
 
@@ -100,7 +68,7 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnResultDelegate))]
 		public static void onResult(bool success)
 		{
-			Helper<bool>.resultCallback(userCallback, success);
+			Helper<bool, bool>.resultCallback(userCallback, success);
 		}
 	}
 
@@ -112,7 +80,7 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
 		public static void onDataResult(IntPtr result, int errorCode)
 		{
-			Helper<playerPublicWr>.dataResultCallback(userCallback, result, errorCode);
+			Helper<playerPublicWr, _playerPublicWr>.dataResultCallback(userCallback, result, errorCode);
 		}
 	}
 
@@ -124,7 +92,7 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
 		public static void onDataResult(IntPtr result, int errorCode)
 		{
-			Helper<playerWr>.dataResultCallback(userCallback, result, errorCode);
+			Helper<playerWr, _playerWr>.dataResultCallback(userCallback, result, errorCode);
 		}
 	}
 
@@ -136,7 +104,7 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
 		public static void onDataResult(IntPtr result, int errorCode)
 		{
-			Helper<pointRWr>.dataResultCallback(userCallback, result, errorCode);
+			Helper<pointRWr, _pointRWr>.dataResultCallback(userCallback, result, errorCode);
 		}
 	}
 
@@ -148,7 +116,7 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
 		public static void onDataResult(IntPtr result, int errorCode)
 		{
-			Helper<quizListWr>.dataResultCallback(userCallback, result, errorCode);
+			Helper<quizListWr, _quizListWr>.dataResultCallback(userCallback, result, errorCode);
 		}
 	}
 
@@ -160,7 +128,7 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
 		public static void onDataResult(IntPtr result, int errorCode)
 		{
-			Helper<quizListWr>.dataResultCallback(userCallback, result, errorCode);
+			Helper<quizListWr, _quizListWr>.dataResultCallback(userCallback, result, errorCode);
 		}
 	}
 
@@ -172,7 +140,7 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
 		public static void onDataResult(IntPtr result, int errorCode)
 		{
-			Helper<quizWr>.dataResultCallback(userCallback, result, errorCode);
+			Helper<quizWr, _quizWr>.dataResultCallback(userCallback, result, errorCode);
 		}
 	}
 
@@ -184,31 +152,31 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
 		public static void onDataResult(IntPtr result, int errorCode)
 		{
-			Helper<quizBasicWr>.dataResultCallback(userCallback, result, errorCode);
+			Helper<quizBasicWr, _quizBasicWr>.dataResultCallback(userCallback, result, errorCode);
 		}
 	}
 
 	// quizDoneList()
 	public class OnQuizDoneListResult
 	{
-		public static OnUserDataResultDelegate<quizDoneListWr> userCallback;
+		public static OnUserDataResultDelegate<List<quizDoneWr>> userCallback;
 
 		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
 		public static void onDataResult(IntPtr result, int errorCode)
 		{
-			Helper<quizDoneListWr>.dataResultCallback(userCallback, result, errorCode);
+			Helper<List<quizDoneWr>, _quizDoneListWr>.dataResultCallback(userCallback, result, errorCode);
 		}
 	}
 
 	// quizPendingList()
 	public class OnQuizPendingListResult
 	{
-		public static OnUserDataResultDelegate<quizPendingListWr> userCallback;
+		public static OnUserDataResultDelegate<List<quizPendingWr>> userCallback;
 
 		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
 		public static void onDataResult(IntPtr result, int errorCode)
 		{
-			Helper<quizPendingListWr>.dataResultCallback(userCallback, result, errorCode);
+			Helper<List<quizPendingWr>, _quizPendingListWr>.dataResultCallback(userCallback, result, errorCode);
 		}
 	}
 
@@ -220,7 +188,7 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
 		public static void onDataResult(IntPtr result, int errorCode)
 		{
-			Helper<questionWr>.dataResultCallback(userCallback, result, errorCode);
+			Helper<questionWr, _questionWr>.dataResultCallback(userCallback, result, errorCode);
 		}
 	}
 
@@ -232,7 +200,7 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
 		public static void onDataResult(IntPtr result, int errorCode)
 		{
-			Helper<questionAnsweredWr>.dataResultCallback(userCallback, result, errorCode);
+			Helper<questionAnsweredWr, _questionAnsweredWr>.dataResultCallback(userCallback, result, errorCode);
 		}
 	}
 
@@ -244,9 +212,154 @@ namespace Playbasis.Wrapper.iOS
 		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
 		public static void onDataResult(IntPtr result, int errorCode)
 		{
-			Helper<ruleWr>.dataResultCallback(userCallback, result, errorCode);
+			Helper<ruleWr, _ruleWr>.dataResultCallback(userCallback, result, errorCode);
 		}
 	}
+
+	// badge()
+	public class OnBadgeResult
+	{
+		public static OnUserDataResultDelegate<badgeWr> userCallback;
+
+		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
+		public static void onDataResult(IntPtr result, int errorCode)
+		{
+			Helper<badgeWr, _badgeWr>.dataResultCallback(userCallback, result, errorCode);
+		}
+	}
+
+	// badges()
+	public class OnBadgesResult
+	{
+		public static OnUserDataResultDelegate<badgesWr> userCallback;
+
+		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
+		public static void onDataResult(IntPtr result, int errorCode)
+		{
+			Helper<badgesWr, _badgesWr>.dataResultCallback(userCallback, result, errorCode);
+		}
+	}
+
+	// cancelQuest()
+	public class OnCancelQuestResult
+	{
+		public static OnUserDataResultDelegate<cancelQuestWr> userCallback;
+
+		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
+		public static void onDataResult(IntPtr result, int errorCode)
+		{
+			Helper<cancelQuestWr, _cancelQuestWr>.dataResultCallback(userCallback, result, errorCode);
+		}
+	}
+
+	// goodsInfo()
+	public class OnGoodsInfoResult
+	{
+		public static OnUserDataResultDelegate<goodsInfoWr> userCallback;
+
+		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
+		public static void onDataResult(IntPtr result, int errorCode)
+		{
+			Helper<goodsInfoWr, _goodsInfoWr>.dataResultCallback(userCallback, result, errorCode);
+		}
+	}
+
+	// goodsInfoList()
+	public class OnGoodsInfoListResult
+	{
+		public static OnUserDataResultDelegate<goodsInfoListWr> userCallback;
+
+		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
+		public static void onDataResult(IntPtr result, int errorCode)
+		{
+			Helper<goodsInfoListWr, _goodsInfoListWr>.dataResultCallback(userCallback, result, errorCode);
+		}
+	}
+
+	// joinAllQuests()
+	public class OnJoinAllQuestsResult
+	{
+		public static OnResultDelegate userCallback;
+
+		[MonoPInvokeCallback(typeof(OnResultDelegate))]
+		public static void onResult(bool success)
+		{
+			Helper<bool, bool>.resultCallback(userCallback, success);
+		}
+	}
+
+	// joinQuest()
+	public class OnJoinQuestResult
+	{
+		public static OnUserDataResultDelegate<joinQuestWr> userCallback;
+
+		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
+		public static void onDataResult(IntPtr result, int errorCode)
+		{
+			Helper<joinQuestWr, _joinQuestWr>.dataResultCallback(userCallback, result, errorCode);
+		}
+	}
+
+	// missionInfo()
+	public class OnMissionInfoResult
+	{
+		public static OnUserDataResultDelegate<missionInfoWr> userCallback;
+
+		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
+		public static void onDataResult(IntPtr result, int errorCode)
+		{
+			Helper<missionInfoWr, _missionInfoWr>.dataResultCallback(userCallback, result, errorCode);
+		}
+	}
+
+	// questAvailableForPlayer()
+	public class OnQuestAvailableForPlayerResult
+	{
+		public static OnUserDataResultDelegate<questAvailableForPlayerWr> userCallback;
+
+		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
+		public static void onDataResult(IntPtr result, int errorCode)
+		{
+			Helper<questAvailableForPlayerWr, _questAvailableForPlayerWr>.dataResultCallback(userCallback, result, errorCode);
+		}
+	}
+
+	// questInfo()
+	public class OnQuestInfoResult
+	{
+		public static OnUserDataResultDelegate<questInfoWr> userCallback;
+
+		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
+		public static void onDataResult(IntPtr result, int errorCode)
+		{
+			Helper<questInfoWr, _questInfoWr>.dataResultCallback(userCallback, result, errorCode);
+		}
+	}
+
+	// questInfoList()
+	public class OnQuestInfoListResult
+	{
+		public static OnUserDataResultDelegate<questInfoListWr> userCallback;
+
+		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
+		public static void onDataResult(IntPtr result, int errorCode)
+		{
+			Helper<questInfoListWr, _questInfoListWr>.dataResultCallback(userCallback, result, errorCode);
+		}
+	}
+
+	// questInfoListForPlayer()
+	public class OnQuestInfoListForPlayerResult
+	{
+		public static OnUserDataResultDelegate<questInfoListWr> userCallback;
+
+		[MonoPInvokeCallback(typeof(OnDataResultDelegate))]
+		public static void onDataResult(IntPtr result, int errorCode)
+		{
+			Helper<questInfoListWr, _questInfoListWr>.dataResultCallback(userCallback, result, errorCode);
+		}
+	}
+	
 
 	#endif
 }

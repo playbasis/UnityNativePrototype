@@ -2,7 +2,6 @@
 using System.Collections;
 using Playbasis.Wrapper;
 using Playbasis.Wrapper.Model;
-using Playbasis.Wrapper.Log;
 
 public class Button : MonoBehaviour
 {
@@ -11,20 +10,9 @@ public class Button : MonoBehaviour
 	private float buttonYGap = 7;
 
 	void Start()
-	{
-		/** MacOSX **/
-		// this is a trick to load Playbasis os x native platform
-		// so we can quickly test thing before building for iOS platform
-		// step
-		// 1. switch to os x and hit play
-		// 2. next time you can switch to ios and normally develop on ios platform (libray is loaded)
-		#if UNITY_STANDALONE_OSX
-		PlaybasisWrapper.loadMacOSXLib();
-		#endif
-		
+	{		
 		buttonHeight = Screen.height * 0.3f;
-
-		PlaybasisWrapper.initialize();
+		PlaybasisWrapper.Instance.initialize();
 	}
 
 	void Update()
@@ -36,7 +24,7 @@ public class Button : MonoBehaviour
 	{
 		GUIStyle style = new GUIStyle();
 		style.alignment = TextAnchor.MiddleCenter;
-        style.fontSize = 60;
+        style.fontSize = 30;
 		GUI.Label(new Rect(0, Screen.height * 0.1f, Screen.width, 20.0f), "This is Unity (" + m_timer.ToString("0.00") + ")!", style);
 
 		if (GUI.Button(new Rect(Screen.width * 0.25f, Screen.height * 0.2f, Screen.width * 0.5f, buttonHeight), "Switch to native..", style))
@@ -48,15 +36,15 @@ public class Button : MonoBehaviour
 		{
 			Debug.Log("Authenticate app");
 			#if UNITY_IOS || UNITY_STANDALONE_OSX
-			PlaybasisWrapper.auth("1012718250", "a52097fc5a17cb0d8631d20eacd2d9c2", "io.wasin.testplugin", new OnResultDelegate(this.OnAuthResult));
+			PlaybasisWrapper.Instance.auth("1012718250", "a52097fc5a17cb0d8631d20eacd2d9c2", "io.wasin.testplugin", this.OnAuthResult);
 			#elif UNITY_ANDROID
-			PlaybasisWrapper.auth("2410120595", "0b98a945d6ba51153133767a14654c79", "io.wasin.testplugin", new OnResultDelegate(this.OnAuthResult));
+			PlaybasisWrapper.Instance.auth("2410120595", "0b98a945d6ba51153133767a14654c79", "io.wasin.testplugin", this.OnAuthResult);
 			#endif
 		}
 		else if (GUI.Button(new Rect(Screen.width * 0.25f, Screen.height * 0.2f + buttonHeight*2 + buttonYGap*2, Screen.width * 0.5f, buttonHeight), "Get player info", style))
 		{
 			Debug.Log("Get player info");
-			PlaybasisWrapper.player("jontestuser", new OnUserDataResultDelegate<playerWr>(this.OnPlayerResult));
+			PlaybasisWrapper.Instance.player("jontestuser", this.OnPlayerResult);
 		}
 	}
 
@@ -78,7 +66,11 @@ public class Button : MonoBehaviour
 	{
 		if (errorCode == -1)
 		{
-			Printer.print<playerWr>(ref result);
+			Debug.Log(result.toString());
+		}
+		else
+		{
+			Debug.Log("failed player api with errorCode [" + errorCode + "]");
 		}
 	}
 }
